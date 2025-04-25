@@ -1,5 +1,5 @@
 
-# 📄 Resume Recommendation Tool (FastAPI + Gemini + Embeddings)
+# Job Recommendation Tool (FastAPI + Gemini + Embeddings)
 
 This project is a resume-to-job matching system built with **FastAPI**, **Gemini (LLM)**, **SBERT embeddings**, and a local **SQLite** database of job listings. It allows users to upload a PDF resume and returns the top job matches, complete with a match score, matched skills, and match reason.
 
@@ -8,9 +8,9 @@ This project is a resume-to-job matching system built with **FastAPI**, **Gemini
 ## 🚀 Features
 
 - ✅ PDF resume parsing with `PyMuPDF`
-- ✅ Skill extraction using Ollama (LLaMA/Mistral)
+- ✅ Skill extraction using Gemini
 - ✅ Job embeddings with SentenceTransformers (SBERT)
-- ✅ Hybrid ranking with embeddings + LLaMA for match reason
+- ✅ Hybrid ranking with embeddings + Gemini for match reason
 - ✅ Word cloud generation
 - ✅ Full CRUD for jobs via FastAPI
 - ✅ Docker-ready for deployment
@@ -56,7 +56,9 @@ pip install -r requirements.txt
 python -m spacy download en_core_web_sm
 ```
 
-### 3. Run the API with Uvicorn
+### 3. Add your Gemini API key to environment variable (.env)
+
+### 4. Run the API with Uvicorn
 
 ```bash
 uvicorn app.main:app --reload
@@ -65,8 +67,6 @@ uvicorn app.main:app --reload
 > The API will be available at http://127.0.0.1:8000
 
 You can now upload resumes via `/docs` or use Postman/your frontend.
-
-> ⚠️ Make sure **Ollama** is running locally (`ollama serve`)
 
 ---
 
@@ -131,17 +131,17 @@ docker run -d   --restart unless-stopped   --network host   -v /home/ubuntu/resu
 ## 🧠 Matching Logic
 
 1. Extracts text from PDF using `PyMuPDF`
-2. Skills are extracted using a local LLM via Ollama
-3. Skills are embedded using SBERT (MiniLM)
-4. Compared to job embeddings using cosine similarity
-5. Top jobs are re-ranked with Mistral and a match reason is generated
+2. Skills are extracted using Gemini Flash 2.0
+3. Skills and jobs are embedded using SBERT (MiniLM)
+4. Top 100 job matches are retrieved using Cosine similarity
+5. These top 100 jobs along with the resume are sent as RAG to Gemini which returns top 10 best matches jobs
 
 ---
 
 ## ⚠️ Notes
 
 - The database (`app.db`) is **not included in the Docker image**
-- Make sure **Ollama** is installed and running (`ollama serve`)
+- Make sure you have a Gemini api key before running the backend
 - Word clouds use extracted skills and frequency from the full resume
 
 ---
