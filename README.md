@@ -1,7 +1,8 @@
-
 # Job Recommendation Tool (FastAPI + Gemini + Embeddings)
 
 This project is a resume-to-job matching system built with **FastAPI**, **Gemini (LLM)**, **SBERT embeddings**, and a local **SQLite** database of job listings. It allows users to upload a PDF resume and returns the top job matches, complete with a match score, matched skills, and match reason.
+
+![Homescreen](img_scr/HomeScreen.png)
 
 ---
 
@@ -103,6 +104,7 @@ docker run -d   --restart unless-stopped   --network host   -v /home/ubuntu/resu
 ### `POST /resume/match`
 
 **Request:**
+
 - Content-Type: `multipart/form-data`
 - Field: `file` → your `.pdf` resume
 
@@ -136,6 +138,10 @@ docker run -d   --restart unless-stopped   --network host   -v /home/ubuntu/resu
 4. Top 100 job matches are retrieved using Cosine similarity
 5. These top 100 jobs along with the resume are sent as RAG to Gemini which returns top 10 best matches jobs
 
+![JobMatches](img_scr/JobMatches.png)
+
+![Additional Job Match]()
+
 ---
 
 ## ⚠️ Notes
@@ -146,6 +152,29 @@ docker run -d   --restart unless-stopped   --network host   -v /home/ubuntu/resu
 
 ---
 
-## 📚 License
+## 📊 Metrics/Eval
+
+* Created script to manually evaluate 200 reumes/job posting pairs (10 job postings per resume 20 resumes in total).
+* Evaluated the accuracy of 7 tokenizer/ranking algorithm pair for job matching/resume pairing task including BERT/BM25, MiniLM/Cosine, MpNet/Bm25, Roberta/BM25, WhitespaceTokenization/Bm25, and LongFormer4096/BM25.
+* Testing showcased MiniLM/Cosine was the best performing combo and was therefore used for initial job posting filtering.
+
+![Metrics](img_scr/Metrics.png)
+
+---
+
+## 🔜 Future Plans
+
+* Login and User Accounts: Allow users to login and save resumes and view past job matches.
+* Multi-Resume: Allow users to upload multiple resumes bound to an account to visualize different matches for a particular resume.
+* Updated Job Pool: Utilize Linkedin or Indeed API for real time job matching.
+* Recommendation System: Recommend certain skills or requirements for specific roles a user desires in order to become a better candidate match for a job description.
+* Resume Pooling: Pool together top scoring resumes for certain positions in order to better allow for resume recommendations for a particular user.
+* Resume Feedback: Suggust improvements to a resume for top job matches based on other top scoring resumes.
+* Multilingual Resume Support: Extend NLP pipeline to process resumes in other languages (e.g. Spanish).
+* Visual PDF Reports: Export match results and resume analysis as professional PDFs.
+
+---
+
+📚 License
 
 MIT License
