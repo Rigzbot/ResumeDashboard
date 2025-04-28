@@ -1,70 +1,65 @@
-# Frontend
 
-This is the folder containing the frontend for the project
+Smart Resume Parser — Frontend
 
-# Dataset (Temporary)
+Welcome!
 
-The Job Dataset has been taken from 
+This is the React app for the Smart Resume Dashboard. It lets you upload a resume and shows you a simple dashboard with:
 
-# Installation/Setup for REACT
+- Top matching jobs with details
+- Skill match analysis
+- Salary trends based on experience and location
+- Benefits shown in a radar chart
+- US map showing where the jobs are
 
-1. Install Node.js https://nodejs.org/, and then run `node -v` and `npm -v` in your terminal to verify.
-2. [Already done so for this project] Create a React project with `npx create-react-app dataviz-dashboard`
-3. Install the required dependencies:
-    - `npm install @mui/material @emotion/react @emotion/styled`
-    - `npm install @mui/icons-material`
-    - `npm install papaparse`
-    - `npm install recharts`
-	- `npm install react-router-dom`
-	- `npm install @mui/x-charts`
+---
+
+Tech Stack
+
+- React
+- Material UI (MUI)
+- React Router
+- D3.js
+- Docker (optional)
+
+---
+
+Getting Started (Local Development)
+
+1. Install Node.js and npm
+
+Download and install Node.js from https://nodejs.org/.
+
+Verify the installation:
+
+node -v
+npm -v
+
+2. Install Project Dependencies
+
+cd dataviz-dashboard
+npm install
+
+3. Start the App
+
+npm start
+
+Visit the app in your browser at http://localhost:3000
+
+---
+
+Docker Deployment
+
+1. Build Docker Image
+
+docker build -t resume-frontend .
+
+2. Run the App in Docker
+
+docker run -it --rm -p 3000:3000 resume-frontend
+
+Make sure your backend URL (in .env or API settings) is correct if the backend is running locally (example: http://localhost:8000).
 
 
+License
 
-4. Commands that we can use inside that directory:
-
-  `npm start`
-    Starts the development server.
-
-  `npm run build`
-    Bundles the app into static files for production.
-
-  `npm test`
-    Starts the test runner.
-
-  `npm run eject`
-    Removes this tool and copies build dependencies, configuration files
-    and scripts into the app directory. If you do this, you can’t go back!
-
-We suggest that you begin by typing:
-
-  `cd dataviz-dashboard`
-  `npm start`
-
-
-### Folder Structure:
-
-src/
-│
-├── assets/              # Static assets like logo, images
-│
-├── components/          # Reusable UI components
-│   ├── DataTable/
-│   │   └── DataTable.jsx
-│   ├── Charts/
-│   │   ├── BarChartComponent.jsx
-│   │   ├── LineChartComponent.jsx
-│   │   ├── PieChartComponent.jsx
-│   │   └── ScatterPlotComponent.jsx
-│   └── Upload/
-│       └── FileUpload.jsx
-│
-├── pages/               # Page-level views
-│   ├── LandingPage.jsx
-│   └── MainPage.jsx
-│
-├── utils/               # Utility functions (e.g., CSV parsing)
-│   └── csvParser.js
-│
-├── App.js               # Main App wrapper
-├── index.js             # Entry point
-└── theme.js             # (Optional) Material UI custom theme setup
+MIT License
